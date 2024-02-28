@@ -1,2 +1,9 @@
+# File Names
 .DS_Store
-.vscode/  
+*.iml
+
+# Directories
+Lab2/lib/
+out/
+.idea/
+.vscode/
