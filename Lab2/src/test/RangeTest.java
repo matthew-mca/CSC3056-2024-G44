@@ -425,4 +425,111 @@ public class RangeTest extends TestCase {
             116.96, rangeObjectUnderTest.getUpperBound()
         );
     }
+
+    // Tests for Range.expandToInclude()
+
+    @Test
+    public void testExpandToIncludeWithValueBelowLowerBoundary() {
+        rangeObjectUnderTest = Range.expandToInclude(rangeObjectUnderTest, -77.0);
+        // Assert lower margin is correct
+        assertEquals(
+            "New lower margin for Range object should be -77.",
+            -77.0, rangeObjectUnderTest.getLowerBound()
+        );
+        // Assert upper margin is correct
+        assertEquals(
+            "Upper margin for Range object should stay at 20.",
+            20.0, rangeObjectUnderTest.getUpperBound()
+        );
+    }
+
+    @Test
+    public void testExpandToIncludeWithValueOnLowerBoundary() {
+        rangeObjectUnderTest = Range.expandToInclude(rangeObjectUnderTest, -76.0);
+        // Assert lower margin is correct
+        assertEquals(
+            "Lower margin for Range object should stay at -76.",
+            -76.0, rangeObjectUnderTest.getLowerBound()
+        );
+        // Assert upper margin is correct
+        assertEquals(
+            "Upper margin for Range object should stay at 20.",
+            20.0, rangeObjectUnderTest.getUpperBound()
+        );
+    }
+
+    @Test
+    public void testExpandToIncludeWithValueAboveLowerBoundary() {
+        rangeObjectUnderTest = Range.expandToInclude(rangeObjectUnderTest, -75.0);
+        // Assert lower margin is correct
+        assertEquals(
+            "Lower margin for Range object should stay at -76.",
+            -76.0, rangeObjectUnderTest.getLowerBound()
+        );
+        // Assert upper margin is correct
+        assertEquals(
+            "Upper margin for Range object should stay at 20.",
+            20.0, rangeObjectUnderTest.getUpperBound()
+        );
+    }
+
+    @Test
+    public void testExpandToIncludeWithNominalValue() {
+        rangeObjectUnderTest = Range.expandToInclude(rangeObjectUnderTest, 8.0);
+        // Assert lower margin is correct
+        assertEquals(
+            "Lower margin for Range object should stay at -76.",
+            -76.0, rangeObjectUnderTest.getLowerBound()
+        );
+        // Assert upper margin is correct
+        assertEquals(
+            "Upper margin for Range object should stay at 20.",
+            20.0, rangeObjectUnderTest.getUpperBound()
+        );
+    }
+
+    @Test
+    public void testExpandToIncludeWithValueBelowUpperBoundary() {
+        rangeObjectUnderTest = Range.expandToInclude(rangeObjectUnderTest, 19.0);
+        // Assert lower margin is correct
+        assertEquals(
+            "Lower margin for Range object should stay at -76.",
+            -76.0, rangeObjectUnderTest.getLowerBound()
+        );
+        // Assert upper margin is correct
+        assertEquals(
+            "Upper margin for Range object should stay at 20.",
+            20.0, rangeObjectUnderTest.getUpperBound()
+        );
+    }
+
+    @Test
+    public void testExpandToIncludeWithValueOnUpperBoundary() {
+        rangeObjectUnderTest = Range.expandToInclude(rangeObjectUnderTest, 20.0);
+        // Assert lower margin is correct
+        assertEquals(
+            "Lower margin for Range object should stay at -76.",
+            -76.0, rangeObjectUnderTest.getLowerBound()
+        );
+        // Assert upper margin is correct
+        assertEquals(
+            "Upper margin for Range object should stay at 20.",
+            20.0, rangeObjectUnderTest.getUpperBound()
+        );
+    }
+
+    @Test
+    public void testExpandToIncludeWithValueAboveUpperBoundary() {
+        rangeObjectUnderTest = Range.expandToInclude(rangeObjectUnderTest, 21.0);
+        // Assert lower margin is correct
+        assertEquals(
+            "Lower margin for Range object should stay at -76.",
+            -76.0, rangeObjectUnderTest.getLowerBound()
+        );
+        // Assert upper margin is correct
+        assertEquals(
+            "New upper margin for Range object should be 21.",
+            21.0, rangeObjectUnderTest.getUpperBound()
+        );
+    }
 }
