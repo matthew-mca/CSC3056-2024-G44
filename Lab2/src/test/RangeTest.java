@@ -156,4 +156,121 @@ public class RangeTest extends TestCase {
             rangeObjectUnderTest.intersects(-76.0, 20.0)
         );
     }
+
+    // Tests for Range.equals()
+
+    @Test
+    public void testEqualsLowerValueBelowUpperBoundaryAndUpperValueOnLowerBoundary() {
+        try{
+            Range comparisonRangeObject = new Range(19.0, -76.0);
+            fail("Invalid Range object did not throw IllegalArgumentException.");
+        }
+        catch(IllegalArgumentException e) {
+            return;
+        }
+        catch(Exception e) {
+            fail("Invalid Range object raised an exception that was not an IllegalArgumentException.");
+        }
+    }
+
+    @Test
+    public void testEqualsLowerValueOnLowerBoundaryAndUpperValueOnUpperBoundary() {
+        Range comparisonRangeObject = new Range(-76.0, 20.0);
+        assertTrue(
+            "Both Range objects have the same lower and upper bounds; the objects should be equal.",
+            rangeObjectUnderTest.equals(comparisonRangeObject)
+        );
+    }
+
+    @Test
+    public void testEqualsLowerValueOnUpperBoundaryAndUpperValueAboveLowerBoundary() {
+        try{
+            Range comparisonRangeObject = new Range(20.0, -75.0);
+            fail("Invalid Range object did not throw IllegalArgumentException.");
+        }
+        catch(IllegalArgumentException e) {
+            return;
+        }
+        catch(Exception e) {
+            fail("Invalid Range object raised an exception that was not an IllegalArgumentException.");
+        }
+    }
+
+    @Test
+    public void testEqualsLowerValueOnUpperBoundaryAndUpperValueAboveUpperBoundary() {
+        Range comparisonRangeObject = new Range(20.0, 21.0);
+        assertFalse(
+            "Both Range objects have different lower and upper bounds; the objects should not be equal.",
+            rangeObjectUnderTest.equals(comparisonRangeObject)
+        );
+    }
+
+    @Test
+    public void testEqualsLowerValueAndUpperValueBelowLowerBoundary() {
+        Range comparisonRangeObject = new Range(-77.0, -77.0);
+        assertFalse(
+            "Both Range objects have different lower and upper bounds; the objects should not be equal.",
+            rangeObjectUnderTest.equals(comparisonRangeObject)
+        );
+    }
+
+    @Test
+    public void testEqualsLowerValueBelowLowerBoundaryAndUpperValueOnUpperBoundary() {
+        Range comparisonRangeObject = new Range(-77.0, 20.0);
+        assertFalse(
+            "Both Range objects have different lower bounds; the objects should not be equal.",
+            rangeObjectUnderTest.equals(comparisonRangeObject)
+        );
+    }
+
+    @Test
+    public void testEqualsLowerValueAboveUpperBoundaryAndUpperValueBelowLowerBoundary() {
+        try{
+            Range comparisonRangeObject = new Range(21.0, -77.0);
+            fail("Invalid Range object did not throw IllegalArgumentException.");
+        }
+        catch(IllegalArgumentException e) {
+            return;
+        }
+        catch(Exception e) {
+            fail("Invalid Range object raised an exception that was not an IllegalArgumentException.");
+        }
+    }
+
+    @Test
+    public void testEqualsLowerValueOnUpperBoundaryAndUpperValueOnLowerBoundary() {
+        try{
+            Range comparisonRangeObject = new Range(20.0, -76.0);
+            fail("Invalid Range object did not throw IllegalArgumentException.");
+        }
+        catch(IllegalArgumentException e) {
+            return;
+        }
+        catch(Exception e) {
+            fail("Invalid Range object raised an exception that was not an IllegalArgumentException.");
+        }
+    }
+
+    @Test
+    public void testEqualsLowerValueIsNominalAndUpperValueOnUpperBoundary() {
+        Range comparisonRangeObject = new Range(8.0, 20.0);
+        assertFalse(
+            "Both Range objects have different lower bounds; the objects should not be equal.",
+            rangeObjectUnderTest.equals(comparisonRangeObject)
+        );
+    }
+
+    @Test
+    public void testEqualsLowerValueOnUpperBoundaryAndUpperValueBelowLowerBoundary() {
+        try{
+            Range comparisonRangeObject = new Range(20.0, -77.0);
+            fail("Invalid Range object did not throw IllegalArgumentException.");
+        }
+        catch(IllegalArgumentException e) {
+            return;
+        }
+        catch(Exception e) {
+            fail("Invalid Range object raised an exception that was not an IllegalArgumentException.");
+        }
+    }
 }
