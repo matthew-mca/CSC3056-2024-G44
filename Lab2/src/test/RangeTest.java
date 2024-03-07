@@ -44,7 +44,7 @@ public class RangeTest extends TestCase {
     }
 
     @Test
-    public void testConstrainWithValueBetweenLowerAndUpperBoundaries() {
+    public void testConstrainWithNominalValue() {
         assertEquals(
             "The value in the range closest to 8 should be 8.",
             8.0, rangeObjectUnderTest.constrain(8.0)
@@ -278,7 +278,7 @@ public class RangeTest extends TestCase {
 
     @Test
     public void testExpandLowerMarginValueOnUpperBoundaryAndUpperMarginValueAboveLowerBoundary() {
-        rangeObjectUnderTest = Range.expand(rangeObjectUnderTest, 1, 0.01);
+        rangeObjectUnderTest = Range.expand(rangeObjectUnderTest, 1.0, 0.01);
         // Assert lower margin is correct
         assertEquals(
             "New lower margin for Range object should be -172.",
@@ -308,7 +308,7 @@ public class RangeTest extends TestCase {
 
     @Test
     public void testExpandLowerMarginValueOnLowerBoundaryAndUpperMarginValueIsNominal() {
-        rangeObjectUnderTest = Range.expand(rangeObjectUnderTest, 0, 0.5);
+        rangeObjectUnderTest = Range.expand(rangeObjectUnderTest, 0.0, 0.5);
         // Assert lower margin is correct
         assertEquals(
             "New lower margin for Range object should be -76.",
@@ -317,13 +317,13 @@ public class RangeTest extends TestCase {
         // Assert upper margin is correct
         assertEquals(
             "New upper margin for Range object should be 68.",
-            68, rangeObjectUnderTest.getUpperBound()
+            68.0, rangeObjectUnderTest.getUpperBound()
         );
     }
 
     @Test
     public void testExpandLowerMarginValueOnUpperBoundaryAndUpperMarginValueOnLowerBoundary() {
-        rangeObjectUnderTest = Range.expand(rangeObjectUnderTest, 1, 0);
+        rangeObjectUnderTest = Range.expand(rangeObjectUnderTest, 1.0, 0.0);
         // Assert lower margin is correct
         assertEquals(
             "New lower margin for Range object should be -172.",
@@ -332,7 +332,7 @@ public class RangeTest extends TestCase {
         // Assert upper margin is correct
         assertEquals(
             "New upper margin for Range object should be 20.",
-            20, rangeObjectUnderTest.getUpperBound()
+            20.0, rangeObjectUnderTest.getUpperBound()
         );
     }
 
@@ -347,7 +347,7 @@ public class RangeTest extends TestCase {
         // Assert upper margin is correct
         assertEquals(
             "New upper margin for Range object should be 68.",
-            68, rangeObjectUnderTest.getUpperBound()
+            68.0, rangeObjectUnderTest.getUpperBound()
         );
     }
 
@@ -368,7 +368,7 @@ public class RangeTest extends TestCase {
 
     @Test
     public void testExpandLowerMarginValueAboveLowerBoundaryAndUpperMarginValueOnLowerBoundary() {
-        rangeObjectUnderTest = Range.expand(rangeObjectUnderTest, 0.01, 0);
+        rangeObjectUnderTest = Range.expand(rangeObjectUnderTest, 0.01, 0.0);
         // Assert lower margin is correct
         assertEquals(
             "New lower margin for Range object should be -76.96.",
@@ -377,13 +377,13 @@ public class RangeTest extends TestCase {
         // Assert upper margin is correct
         assertEquals(
             "New upper margin for Range object should be 20.",
-            20, rangeObjectUnderTest.getUpperBound()
+            20.0, rangeObjectUnderTest.getUpperBound()
         );
     }
 
     @Test
     public void testExpandLowerMarginValueOnLowerBoundaryAndUpperMarginValueBelowUpperBoundary() {
-        rangeObjectUnderTest = Range.expand(rangeObjectUnderTest, 0, 0.99);
+        rangeObjectUnderTest = Range.expand(rangeObjectUnderTest, 0.0, 0.99);
         // Assert lower margin is correct
         assertEquals(
             "New lower margin for Range object should be -76.",
@@ -407,17 +407,17 @@ public class RangeTest extends TestCase {
         // Assert upper margin is correct
         assertEquals(
             "New upper margin for Range object should be 68.",
-            68, rangeObjectUnderTest.getUpperBound()
+            68.0, rangeObjectUnderTest.getUpperBound()
         );
     }
 
     @Test
     public void testExpandLowerMarginValueOnUpperBoundaryAndUpperMarginValueAboveUpperBoundary() {
-        rangeObjectUnderTest = Range.expand(rangeObjectUnderTest, 1, 1.01);
+        rangeObjectUnderTest = Range.expand(rangeObjectUnderTest, 1.0, 1.01);
         // Assert lower margin is correct
         assertEquals(
             "New lower margin for Range object should be -172.",
-            -172, rangeObjectUnderTest.getLowerBound()
+            -172.0, rangeObjectUnderTest.getLowerBound()
         );
         // Assert upper margin is correct
         assertEquals(
