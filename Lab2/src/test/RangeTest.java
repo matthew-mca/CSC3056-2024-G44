@@ -445,17 +445,22 @@ public class RangeTest extends TestCase {
 
     @Test
     public void testExpandToIncludeWithValueOnLowerBoundary() {
-        rangeObjectUnderTest = Range.expandToInclude(rangeObjectUnderTest, -76.0);
-        // Assert lower margin is correct
-        assertEquals(
-            "Lower margin for Range object should stay at -76.",
-            -76.0, rangeObjectUnderTest.getLowerBound()
-        );
-        // Assert upper margin is correct
-        assertEquals(
-            "Upper margin for Range object should stay at 20.",
-            20.0, rangeObjectUnderTest.getUpperBound()
-        );
+        try{
+            rangeObjectUnderTest = Range.expandToInclude(rangeObjectUnderTest, -76.0);
+            // Assert lower margin is correct
+            assertEquals(
+                "Lower margin for Range object should stay at -76.",
+                -76.0, rangeObjectUnderTest.getLowerBound()
+            );
+            // Assert upper margin is correct
+            assertEquals(
+                "Upper margin for Range object should stay at 20.",
+                20.0, rangeObjectUnderTest.getUpperBound()
+            );
+        }
+        catch(IllegalArgumentException e){
+            fail("expandToInclude() threw an unexpected IllegalArgumentException.");
+        }
     }
 
     @Test
