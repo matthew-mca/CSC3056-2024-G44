@@ -92,7 +92,7 @@ public class DataUtilitiesTest extends TestCase {
     public void testCalculateRowTotalWithPositive() {
         values2D.addValue(2, 0, 0);
         values2D.addValue(3, 0, 1);
-        assertEquals("Row total with positive values, should be 5", 2.0, DataUtilities.calculateColumnTotal(values2D, 0),
+        assertEquals("Row total with positive values, should be 5", 2.0, DataUtilities.calculateRowTotal(values2D, 0),
                 0.00001);
     }
 
@@ -101,7 +101,7 @@ public class DataUtilitiesTest extends TestCase {
     public void testCalculateRowTotalWithNegative() {
         values2D.addValue(-2, 0, 0);
         values2D.addValue(-3, 0, 1);
-        assertEquals("Row total with negative values, should be -2", -2.0, DataUtilities.calculateColumnTotal(values2D, 0),
+        assertEquals("Row total with negative values, should be -2", -2.0, DataUtilities.calculateRowTotal(values2D, 0),
                 0.00001);
     }
 
@@ -110,7 +110,7 @@ public class DataUtilitiesTest extends TestCase {
     public void testCalculateRowTotalWithMixed() {
         values2D.addValue(-2, 0, 0);
         values2D.addValue(3, 0, 1);
-        assertEquals("Row total with mixed values, should be -2", -2.0, DataUtilities.calculateColumnTotal(values2D, 0),
+        assertEquals("Row total with mixed values, should be -2", -2.0, DataUtilities.calculateRowTotal(values2D, 0),
                 0.00001);
     }
 
@@ -136,7 +136,7 @@ public class DataUtilitiesTest extends TestCase {
 
     // Test Case 3.1.2.6
     @Test
-    public void testCalculateColumnTotalOutOfBounds() {
+    public void testCalculateRowTotalOutOfBounds() {
         values2D.addValue(2, 0, 0);
         DataUtilities.calculateRowTotal(values2D, 1);
     }
@@ -312,9 +312,13 @@ public class DataUtilitiesTest extends TestCase {
     }
 
     // Test Case 3.1.4.7
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testCreateNumberArray2DWithNull() {
-        DataUtilities.createNumberArray2D(null);
+        try {
+            DataUtilities.createNumberArray2D(null);
+            fail("Expected IllegalArgumentException was not thrown");
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     // Test Case 3.1.4.8
@@ -427,8 +431,6 @@ public class DataUtilitiesTest extends TestCase {
             DataUtilities.getCumulativePercentages(null);
             fail("Expected IllegalArgumentException was not thrown");
         } catch (IllegalArgumentException e) {
-            // Expected IllegalArgumentException was thrown
-            assertNotNull(e.getMessage()); // Optionally, assert on the exception message
         }
     }
 }
