@@ -82,7 +82,6 @@ public class DataUtilitiesTest extends TestCase {
             DataUtilities.calculateColumnTotal(values2D, 1);
             fail("Expected IndexOutOfBoundsException was not thrown");
         } catch (IndexOutOfBoundsException e) {
-            // This catch block is expected to catch the IndexOutOfBoundsException
         }
     }
 
@@ -198,7 +197,6 @@ public class DataUtilitiesTest extends TestCase {
         }
     }
 
-
     // Test Case 3.1.3.5
     @Test
     public void testCreateNumberArrayWithSingleElement() {
@@ -231,7 +229,7 @@ public class DataUtilitiesTest extends TestCase {
     }
 
     // Tests for DataUtilities.createNumberArray2D()
-// Test Case 3.1.4.1
+    // Test Case 3.1.4.1
     @Test
     public void testCreateNumberArray2DWithTwoArraysOfPositiveNumbers() {
         double[][] inputData = {{1.0, 2.0}, {3.0, 4.0}};
@@ -287,7 +285,6 @@ public class DataUtilitiesTest extends TestCase {
         }
     }
 
-
     // Test Case 3.1.4.5
     @Test
     public void testCreateNumberArray2DWithOnlySingleElementInEach() {
@@ -330,7 +327,6 @@ public class DataUtilitiesTest extends TestCase {
             DataUtilities.createNumberArray2D(inputData);
             fail("Expected IllegalArgumentException was not thrown");
         } catch (IllegalArgumentException e) {
-            // This catch block is expected to catch the IllegalArgumentException
             assertEquals("Null 'data' argument.", e.getMessage());
         }
     }
@@ -354,7 +350,6 @@ public class DataUtilitiesTest extends TestCase {
         try {
             actual = DataUtilities.createNumberArray2D(inputData);
         } catch (Exception e) {
-            // Catch any exceptions and fail the test with an appropriate message
             fail("Exception occurred: " + e.getMessage());
         }
     }
@@ -363,7 +358,7 @@ public class DataUtilitiesTest extends TestCase {
     private DefaultKeyedValues createKeyedValues(double[] doubles) {
         DefaultKeyedValues result = new DefaultKeyedValues();
         for (int i = 0; i < doubles.length; i++) {
-            result.addValue(Integer.toString(i), doubles[i]); // Explicitly specify the key as a String
+            result.addValue(Integer.toString(i), doubles[i]);
         }
         return result;
     }
@@ -402,7 +397,7 @@ public class DataUtilitiesTest extends TestCase {
 
         DefaultKeyedValues expected = new DefaultKeyedValues();
         expected.addValue("2", 3);
-        expected.addValue("1", 5); // Adjusted expected value
+        expected.addValue("1", 5);
         expected.addValue("0", 7);
 
         KeyedValues actual = DataUtilities.getCumulativePercentages(input);
