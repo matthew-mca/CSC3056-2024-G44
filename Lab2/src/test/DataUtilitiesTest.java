@@ -268,67 +268,66 @@ public class DataUtilitiesTest extends TestCase {
 		Number[][] actual = DataUtilities.createNumberArray2D(inputData);
 		assertArrayEquals(expected, actual);
 	}
+
+// Tests for DataUtilities.getCumulativePercentages()
+// Test Case 3.1.5.1
+@Test
+public void testGetCumulativePercentagesNormalCase() {
+	KeyedValues input = DataUtilities(new double[]{5, 9, 2});
+	KeyedValues expected = createKeyedValues(new double[]{0.3125, 0.875, 1.0});
+
+	KeyedValues actual = DataUtilities.getCumulativePercentages(input);
+	for (int i = 0; i < actual.getItemCount(); i++) {
+		assertEquals("Cumulative percentage doesn't match", expected.getValue(i).doubleValue(), actual.getValue(i).doubleValue(), 0.0001);
+	}
 }
-//
-//// Tests for DataUtilities.getCumulativePercentages()
-//// Test Case 3.1.5.1
-//@Test
-//public void testGetCumulativePercentagesNormalCase() {
-//	KeyedValues input = DataUtilities(new double[]{5, 9, 2});
-//	KeyedValues expected = createKeyedValues(new double[]{0.3125, 0.875, 1.0});
-//
-//	KeyedValues actual = DataUtilities.getCumulativePercentages(input);
-//	for (int i = 0; i < actual.getItemCount(); i++) {
-//		assertEquals("Cumulative percentage doesn't match", expected.getValue(i).doubleValue(), actual.getValue(i).doubleValue(), 0.0001);
-//	}
-//}
-//	// Test Case 3.1.5.2
-//	@Test
-//	public void testGetCumulativePercentagesWithZero() {
-//		KeyedValues input = DataUtilities(new double[]{0, 9, 2});
-//		KeyedValues expected = DataUtilities(new double[]{0.0, 0.8182, 1.0});
-//
-//		KeyedValues actual = DataUtilities.getCumulativePercentages(input);
-//		for (int i = 0; i < actual.getItemCount(); i++) {
-//			assertEquals("Cumulative percentage doesn't match", expected.getValue(i).doubleValue(), actual.getValue(i).doubleValue(), 0.0001);
-//		}
-//	}
-//
-//	// Test Case 3.1.5.3
-//	@Test
-//	public void testGetCumulativePercentagesNonSequentialKeys() {
-//		DefaultKeyedValues input = new DefaultKeyedValues();
-//		input.addValue(2, 2);
-//		input.addValue(1, 9);
-//		input.addValue(0, 5);
-//
-//		DefaultKeyedValues expected = new DefaultKeyedValues();
-//		expected.addValue(2, 0.125);
-//		expected.addValue(1, 0.9375);
-//		expected.addValue(0, 1.0);
-//
-//		KeyedValues actual = DataUtilities.getCumulativePercentages(input);
-//		for (int i = 0; i < actual.getItemCount(); i++) {
-//			assertEquals("Cumulative percentage doesn't match for non-sequential keys",
-//					expected.getValue(i).doubleValue(), actual.getValue(i).doubleValue(), 0.0001);
-//		}
-//	}
-//
-//	// Test Case 3.1.5.4
-//	@Test
-//	public void testGetCumulativePercentagesSingleValue() {
-//		KeyedValues input = createKeyedValues(new double[]{42});
-//		KeyedValues expected = createKeyedValues(new double[]{1.0});
-//
-//		KeyedValues actual = DataUtilities.getCumulativePercentages(input);
-//		for (int i = 0; i < actual.getItemCount(); i++) {
-//			assertEquals("Cumulative percentage for single value doesn't match", expected.getValue(i).doubleValue(), actual.getValue(i).doubleValue(), 0.0001);
-//		}
-//	}
-//
-//	// Test Case 3.1.5.5
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testGetCumulativePercentagesNullInput() {
-//		DataUtilities.getCumulativePercentages(null);
-//	}
-//}
+	// Test Case 3.1.5.2
+	@Test
+	public void testGetCumulativePercentagesWithZero() {
+		KeyedValues input = DataUtilities(new double[]{0, 9, 2});
+		KeyedValues expected = DataUtilities(new double[]{0.0, 0.8182, 1.0});
+
+		KeyedValues actual = DataUtilities.getCumulativePercentages(input);
+		for (int i = 0; i < actual.getItemCount(); i++) {
+			assertEquals("Cumulative percentage doesn't match", expected.getValue(i).doubleValue(), actual.getValue(i).doubleValue(), 0.0001);
+		}
+	}
+
+	// Test Case 3.1.5.3
+	@Test
+	public void testGetCumulativePercentagesNonSequentialKeys() {
+		DefaultKeyedValues input = new DefaultKeyedValues();
+		input.addValue(2, 2);
+		input.addValue(1, 9);
+		input.addValue(0, 5);
+
+		DefaultKeyedValues expected = new DefaultKeyedValues();
+		expected.addValue(2, 0.125);
+		expected.addValue(1, 0.9375);
+		expected.addValue(0, 1.0);
+
+		KeyedValues actual = DataUtilities.getCumulativePercentages(input);
+		for (int i = 0; i < actual.getItemCount(); i++) {
+			assertEquals("Cumulative percentage doesn't match for non-sequential keys",
+					expected.getValue(i).doubleValue(), actual.getValue(i).doubleValue(), 0.0001);
+		}
+	}
+
+	// Test Case 3.1.5.4
+	@Test
+	public void testGetCumulativePercentagesSingleValue() {
+		KeyedValues input = createKeyedValues(new double[]{42});
+		KeyedValues expected = createKeyedValues(new double[]{1.0});
+
+		KeyedValues actual = DataUtilities.getCumulativePercentages(input);
+		for (int i = 0; i < actual.getItemCount(); i++) {
+			assertEquals("Cumulative percentage for single value doesn't match", expected.getValue(i).doubleValue(), actual.getValue(i).doubleValue(), 0.0001);
+		}
+	}
+
+	// Test Case 3.1.5.5
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetCumulativePercentagesNullInput() {
+		DataUtilities.getCumulativePercentages(null);
+	}
+}
