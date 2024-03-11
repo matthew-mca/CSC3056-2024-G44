@@ -222,10 +222,14 @@ public class DataUtilitiesTest extends TestCase {
     }
 
     // Test Case 3.1.3.7
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testCreateNumberArrayWithEmpty() {
-        double[] inputData = {};
-        DataUtilities.createNumberArray(inputData);
+        try {
+            double[] inputData = {};
+            DataUtilities.createNumberArray(inputData);
+            fail("Expected IllegalArgumentException was not thrown");
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     // Tests for DataUtilities.createNumberArray2D()
