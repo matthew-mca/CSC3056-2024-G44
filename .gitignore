@@ -7,3 +7,15 @@ Lab2/lib/
 out/
 .idea/
 .vscode/
+
+# Lab 3 gitignore directories so that only the test files are committed
+Lab3/*
+!Lab3/JFreeChart/
+Lab3/JFreeChart/*
+!Lab3/JFreeChart/source/
+Lab3/JFreeChart/source/*
+!Lab3/JFreeChart/source/org
+Lab3/JFreeChart/source/org/jfree/*
+!Lab3/JFreeChart/source/org/jfree/data/
+Lab3/JFreeChart/source/org/jfree/data/*
+!Lab3/JFreeChart/source/org/jfree/data/*Test.java
