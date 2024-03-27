@@ -127,13 +127,14 @@ public class DataUtilitiesTest extends TestCase {
     public void testCalculateRowTotalWithNull() {
         try {
             DataUtilities.calculateRowTotal(null, 0);
-            fail("Expected exception was not thrown.");
+            fail("Expected IllegalArgumentException was not thrown.");
         } catch (IllegalArgumentException e) {
             return;
         } catch (NullPointerException e) {
+            fail("A NullPointerException should not be raised:" + e.getMessage());
             return;
         } catch (Exception e) {
-            fail("Invalid exception raised that was not an IllegalArgumentException or NullPointerException.");
+            fail("Invalid exception raised that was not an IllegalArgumentException.");
         }
     }
 
@@ -141,14 +142,12 @@ public class DataUtilitiesTest extends TestCase {
     @Test
     public void testCalculateRowTotalOutOfBounds() {
         DefaultKeyedValues2D values2D = new DefaultKeyedValues2D();
-        values2D.addValue(2, 0, 0); // Assuming a setup step to add a value, as your context implies
+        values2D.addValue(2, 0, 0);
         try {
             DataUtilities.calculateRowTotal(values2D, 1); // Testing for row index out of bounds
             fail("Expected IndexOutOfBoundsException was not thrown.");
-        } catch (IndexOutOfBoundsException e) {
-            return;
         } catch (Exception e) {
-            fail("Invalid exception raised that was not an IndexOutOfBounds.");
+            fail("Invalid exception raised that was not an IndexOutOfBounds." + e.getMessage());
         }
     }
 
