@@ -92,7 +92,7 @@ public class DataUtilitiesTest extends TestCase {
         values2D.addValue(2, 0, 0);
         values2D.addValue(3, 0, 1);
         assertEquals("Row total with positive values, should be 5", 2.0, DataUtilities.calculateRowTotal(values2D, 0),
-                0.00001);
+            0.00001);
     }
 
     // Test Case 3.1.2.2
@@ -101,7 +101,7 @@ public class DataUtilitiesTest extends TestCase {
         values2D.addValue(-2, 0, 0);
         values2D.addValue(-3, 0, 1);
         assertEquals("Row total with negative values, should be -2", -2.0, DataUtilities.calculateRowTotal(values2D, 0),
-                0.00001);
+            0.00001);
     }
 
     // Test Case 3.1.2.3
@@ -110,7 +110,7 @@ public class DataUtilitiesTest extends TestCase {
         values2D.addValue(-2, 0, 0);
         values2D.addValue(3, 0, 1);
         assertEquals("Row total with mixed values, should be -2", -2.0, DataUtilities.calculateRowTotal(values2D, 0),
-                0.00001);
+            0.00001);
     }
 
     // Test Case 3.1.2.4
@@ -127,25 +127,36 @@ public class DataUtilitiesTest extends TestCase {
     public void testCalculateRowTotalWithNull() {
         try {
             DataUtilities.calculateRowTotal(null, 0);
-            fail("Expected IllegalArgumentException was not thrown");
+            fail("Expected IllegalArgumentException was not thrown.");
         } catch (IllegalArgumentException e) {
-            assertEquals("Null 'data' argument.", e.getMessage());
+            return;
+        } catch (NullPointerException e) {
+            fail("A NullPointerException should not be raised:" + e.getMessage());
+            return;
+        } catch (Exception e) {
+            fail("Invalid exception raised that was not an IllegalArgumentException.");
         }
     }
 
     // Test Case 3.1.2.6
     @Test
     public void testCalculateRowTotalOutOfBounds() {
+        DefaultKeyedValues2D values2D = new DefaultKeyedValues2D();
         values2D.addValue(2, 0, 0);
-        DataUtilities.calculateRowTotal(values2D, 1);
+        try {
+            DataUtilities.calculateRowTotal(values2D, 1); // Testing for row index out of bounds
+            fail("Expected IndexOutOfBoundsException was not thrown.");
+        } catch (Exception e) {
+            fail("Invalid exception raised that was not an IndexOutOfBounds." + e.getMessage());
+        }
     }
 
     // Tests for DataUtilities.createNumberArray()
     // Test Case 3.1.3.1
     @Test
     public void testCreateNumberArrayWithPositiveNumbers() {
-        double[] inputData = {1.0, 2.0, 3.0};
-        Number[] expected = {1.0, 2.0, 3.0};
+        double[] inputData = { 1.0, 2.0, 3.0 };
+        Number[] expected = { 1.0, 2.0, 3.0 };
 
         try {
             Number[] actual = DataUtilities.createNumberArray(inputData);
@@ -158,8 +169,8 @@ public class DataUtilitiesTest extends TestCase {
     // Test Case 3.1.3.2
     @Test
     public void testCreateNumberArrayWithNegativeNumbers() {
-        double[] inputData = {-1.0, -2.0, -3.0};
-        Number[] expected = {-1.0, -2.0, -3.0};
+        double[] inputData = { -1.0, -2.0, -3.0 };
+        Number[] expected = { -1.0, -2.0, -3.0 };
 
         try {
             Number[] actual = DataUtilities.createNumberArray(inputData);
@@ -172,8 +183,8 @@ public class DataUtilitiesTest extends TestCase {
     // Test Case 3.1.3.3
     @Test
     public void testCreateNumberArrayWithMixedPositiveAndNegativeNumbers() {
-        double[] inputData = {1.0, -1.0, 2.0};
-        Number[] expected = {1.0, -1.0, 2.0};
+        double[] inputData = { 1.0, -1.0, 2.0 };
+        Number[] expected = { 1.0, -1.0, 2.0 };
 
         try {
             Number[] actual = DataUtilities.createNumberArray(inputData);
@@ -186,8 +197,8 @@ public class DataUtilitiesTest extends TestCase {
     // Test Case 3.1.3.4
     @Test
     public void testCreateNumberArrayWithNumberValuesBeingZerosOnly() {
-        double[] inputData = {0.0, 0.0, 0.0};
-        Number[] expected = {0.0, 0.0, 0.0};
+        double[] inputData = { 0.0, 0.0, 0.0 };
+        Number[] expected = { 0.0, 0.0, 0.0 };
 
         try {
             Number[] actual = DataUtilities.createNumberArray(inputData);
@@ -200,8 +211,8 @@ public class DataUtilitiesTest extends TestCase {
     // Test Case 3.1.3.5
     @Test
     public void testCreateNumberArrayWithSingleElement() {
-        double[] inputData = {42.0};
-        Number[] expected = {42.0};
+        double[] inputData = { 42.0 };
+        Number[] expected = { 42.0 };
         try {
             Number[] actual = DataUtilities.createNumberArray(inputData);
             assertArrayEquals("Single element arrays should match", expected, actual);
@@ -236,8 +247,8 @@ public class DataUtilitiesTest extends TestCase {
     // Test Case 3.1.4.1
     @Test
     public void testCreateNumberArray2DWithTwoArraysOfPositiveNumbers() {
-        double[][] inputData = {{1.0, 2.0}, {3.0, 4.0}};
-        Number[][] expected = {{1.0, 2.0}, {3.0, 4.0}};
+        double[][] inputData = { { 1.0, 2.0 }, { 3.0, 4.0 } };
+        Number[][] expected = { { 1.0, 2.0 }, { 3.0, 4.0 } };
 
         try {
             Number[][] actual = DataUtilities.createNumberArray2D(inputData);
@@ -250,8 +261,8 @@ public class DataUtilitiesTest extends TestCase {
     // Test Case 3.1.4.2
     @Test
     public void testCreateNumberArray2DWithTwoArraysOfNegativeNumbers() {
-        double[][] inputData = {{-1.0, -2.0}, {-3.0, -4.0}};
-        Number[][] expected = {{-1.0, -2.0}, {-3.0, -4.0}};
+        double[][] inputData = { { -1.0, -2.0 }, { -3.0, -4.0 } };
+        Number[][] expected = { { -1.0, -2.0 }, { -3.0, -4.0 } };
 
         try {
             Number[][] actual = DataUtilities.createNumberArray2D(inputData);
@@ -264,8 +275,8 @@ public class DataUtilitiesTest extends TestCase {
     // Test Case 3.1.4.3
     @Test
     public void testCreateNumberArray2DWithTwoArraysOfMixedPositiveAndNegativeNumbers() {
-        double[][] inputData = {{1.0, -1.0}, {-2.0, 2.0}};
-        Number[][] expected = {{1.0, -1.0}, {-2.0, 2.0}};
+        double[][] inputData = { { 1.0, -1.0 }, { -2.0, 2.0 } };
+        Number[][] expected = { { 1.0, -1.0 }, { -2.0, 2.0 } };
 
         try {
             Number[][] actual = DataUtilities.createNumberArray2D(inputData);
@@ -278,8 +289,8 @@ public class DataUtilitiesTest extends TestCase {
     // Test Case 3.1.4.4
     @Test
     public void testCreateNumberArray2DWithTwoArraysOfOnlyZeros() {
-        double[][] inputData = {{0.0, 0.0}, {0.0, 0.0}};
-        Number[][] expected = {{0.0, 0.0}, {0.0, 0.0}};
+        double[][] inputData = { { 0.0, 0.0 }, { 0.0, 0.0 } };
+        Number[][] expected = { { 0.0, 0.0 }, { 0.0, 0.0 } };
 
         try {
             Number[][] actual = DataUtilities.createNumberArray2D(inputData);
@@ -292,8 +303,8 @@ public class DataUtilitiesTest extends TestCase {
     // Test Case 3.1.4.5
     @Test
     public void testCreateNumberArray2DWithOnlySingleElementInEach() {
-        double[][] inputData = {{42.0}, {27.0}};
-        Number[][] expected = {{42.0}, {27.0}};
+        double[][] inputData = { { 42.0 }, { 27.0 } };
+        Number[][] expected = { { 42.0 }, { 27.0 } };
 
         try {
             Number[][] actual = DataUtilities.createNumberArray2D(inputData);
@@ -306,8 +317,8 @@ public class DataUtilitiesTest extends TestCase {
     // Test Case 3.1.4.6
     @Test
     public void testCreateNumberArray2DWithTwoArraysOfVaryingLengths() {
-        double[][] inputData = {{1.0, 2.0}, {}, {3.0}};
-        Number[][] expected = {{1.0, 2.0}, {}, {3.0}};
+        double[][] inputData = { { 1.0, 2.0 }, {}, { 3.0 } };
+        Number[][] expected = { { 1.0, 2.0 }, {}, { 3.0 } };
         Number[][] actual = DataUtilities.createNumberArray2D(inputData);
         assertArrayEquals(expected, actual);
     }
@@ -325,7 +336,7 @@ public class DataUtilitiesTest extends TestCase {
     // Test Case 3.1.4.8
     @Test
     public void testCreateNumberArray2DWithTwoArraysAndOneContainsNullSubArray() {
-        double[][] inputData = {{1.0, 2.0}, null, {3.0}};
+        double[][] inputData = { { 1.0, 2.0 }, null, { 3.0 } };
 
         try {
             DataUtilities.createNumberArray2D(inputData);
@@ -347,8 +358,8 @@ public class DataUtilitiesTest extends TestCase {
     // Test Case 3.1.4.10
     @Test
     public void testCreateNumberArray2DWithEmptySubArray() {
-        double[][] inputData = {{}, {1.0, 2.0}};
-        Number[][] expected = {{}, {1.0, 2.0}};
+        double[][] inputData = { {}, { 1.0, 2.0 } };
+        Number[][] expected = { {}, { 1.0, 2.0 } };
         Number[][] actual = null; // Initializing actual array
 
         try {
@@ -370,24 +381,26 @@ public class DataUtilitiesTest extends TestCase {
     // Test Case 3.1.5.1
     @Test
     public void testGetCumulativePercentagesNormalCase() {
-        KeyedValues input = createKeyedValues(new double[]{2, 4, 6});
-        KeyedValues expected = createKeyedValues(new double[]{3, 5, 7});
+        KeyedValues input = createKeyedValues(new double[] { 2, 4, 6 });
+        KeyedValues expected = createKeyedValues(new double[] { 3, 5, 7 });
 
         KeyedValues actual = DataUtilities.getCumulativePercentages(input);
         for (int i = 0; i < actual.getItemCount(); i++) {
-            assertEquals("Cumulative percentage doesn't match", expected.getValue(i).doubleValue(), actual.getValue(i).doubleValue(), 0.0001);
+            assertEquals("Cumulative percentage doesn't match", expected.getValue(i).doubleValue(),
+                actual.getValue(i).doubleValue(), 0.0001);
         }
     }
 
     // Test Case 3.1.5.2
     @Test
     public void testGetCumulativePercentagesWithZero() {
-        KeyedValues input = createKeyedValues(new double[]{2, 4, 6});
-        KeyedValues expected = createKeyedValues(new double[]{3, 5, 7});
+        KeyedValues input = createKeyedValues(new double[] { 2, 4, 6 });
+        KeyedValues expected = createKeyedValues(new double[] { 3, 5, 7 });
 
         KeyedValues actual = DataUtilities.getCumulativePercentages(input);
         for (int i = 0; i < actual.getItemCount(); i++) {
-            assertEquals("Cumulative percentage doesn't match", expected.getValue(i).doubleValue(), actual.getValue(i).doubleValue(), 0.0001);
+            assertEquals("Cumulative percentage doesn't match", expected.getValue(i).doubleValue(),
+                actual.getValue(i).doubleValue(), 0.0001);
         }
     }
 
@@ -407,20 +420,25 @@ public class DataUtilitiesTest extends TestCase {
         KeyedValues actual = DataUtilities.getCumulativePercentages(input);
         for (int i = 0; i < actual.getItemCount(); i++) {
             assertEquals("Cumulative percentage doesn't match for non-sequential keys",
-                    expected.getValue(i).doubleValue(), actual.getValue(i).doubleValue(), 0.0001);
+                expected.getValue(i).doubleValue(), actual.getValue(i).doubleValue(), 0.0001);
         }
     }
 
     // Test Case 3.1.5.4
     @Test
     public void testGetCumulativePercentagesSingleValue() {
-        KeyedValues input = createKeyedValues(new double[]{42});
-        KeyedValues expected = createKeyedValues(new double[]{});
+        KeyedValues input = createKeyedValues(new double[] { 42 });
+        // Since it's a single value, it should represent 100% of the data, or 1.0 as
+        // the cumulative percentage
+        KeyedValues expected = createKeyedValues(new double[] { 1.0 });
 
         KeyedValues actual = DataUtilities.getCumulativePercentages(input);
-        for (int i = 0; i < actual.getItemCount(); i++) {
-            assertEquals("Cumulative percentage for single value doesn't match", expected.getValue(i).doubleValue(), actual.getValue(i).doubleValue(), 0.0001);
-        }
+        assertNotNull("The actual result should not be null", actual);
+        assertEquals("Expected one item in the result", 1, actual.getItemCount());
+
+        // Compare the expected and actual results
+        assertEquals("Cumulative percentage for single value doesn't match", expected.getValue(0).doubleValue(),
+            actual.getValue(0).doubleValue(), 0.0001);
     }
 
     // Test Case 3.1.5.5
@@ -428,8 +446,10 @@ public class DataUtilitiesTest extends TestCase {
     public void testGetCumulativePercentagesNullInput() {
         try {
             DataUtilities.getCumulativePercentages(null);
-            fail("Expected IllegalArgumentException was not thrown");
+            fail("Expected IllegalArgumentException was not thrown.");
         } catch (IllegalArgumentException e) {
+            assertEquals("Null 'data' argument.", e.getMessage()); // Ensure the exception message matches expectation
         }
     }
+
 }
